@@ -1,16 +1,23 @@
 #!/usr/bin/env node
 
-  //const url = 'https://corporatebs-generator.sameerkumar.website/'
-
-
-import chalk from 'chalk'
-import mockWeatherData from './mockWeatherData.js'
 import dotenv from 'dotenv/config'
+import chalk from 'chalk'
 import readline from 'node:readline'
 import { URLSearchParams } from 'node:url';
 
 
 const log = console.log;
+
+  log(chalk.blue`
+██╗    ██╗███████╗ █████╗ ████████╗██╗  ██╗███████╗██████╗ 
+██║    ██║██╔════╝██╔══██╗╚══██╔══╝██║  ██║██╔════╝██╔══██╗
+██║ █╗ ██║█████╗  ███████║   ██║   ███████║█████╗  ██████╔╝
+██║███╗██║██╔══╝  ██╔══██║   ██║   ██╔══██║██╔══╝  ██╔══██╗
+╚███╔███╔╝███████╗██║  ██║   ██║   ██║  ██║███████╗██║  ██║
+ ╚══╝╚══╝ ╚══════╝╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝
+`                                                           
+)
+
 //CLI request user input instance
 const rl = readline.createInterface({
   input: process.stdin,
@@ -36,28 +43,32 @@ async function getWeather(city) {
 
     const data = await response.json()
     //test data response
-    // log(data)
+    //log(data)
 
     let tempC = data.current.temp_c; 
     let tempF = data.current.temp_f;
+    let condition = data.current.condition.text;
+    let time = data.location.localtime;
 
-    if(tempC < 15 || tempF < 59){
-      log(`The current temperature in ${city} is: ${chalk.blue(tempC)}°C | ${chalk.blue(tempF)}°F.`)
+    log(`\n${chalk.bold.yellow(time)}`)
+    log(chalk.bold.green(`Weather in ${city} »`))
+    console.group();
+    log(`\n${chalk.bold.cyan(condition)}`)
+    if(tempC < 18 || tempF < 64.4){
+      log(`${chalk.bold.blue(tempC)}${chalk.bold.blue('°C')} | ${chalk.bold.blue(tempF)}${chalk.bold.blue('°F')}\n`)
     } else {
-      log(`The current temperature in ${city} is: ${chalk.red(tempC)}°C | ${chalk.red(tempF)}°F.`)
+      log(`${chalk.bold.red(tempC)}${chalk.bold.red('°C')} | ${chalk.bold.red(tempF)}${chalk.bold.red('°F')}\n`)
     }
-    
+    console.groupEnd();
   } catch (error){
      log(error.message)
-
    }
 
   }
 
 
 //Reques User input 
-rl.question(`Enter your city...`, city => {
-  console.log(`User city: ${city}!`);
+rl.question(chalk.bgMagenta(`Enter your city:`), city => {
   getWeather(city); 
   rl.close();
 });
