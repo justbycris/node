@@ -4,10 +4,10 @@ Build a command-line weather app that fetches and displays weather data with a n
 
 **Requirements:**
 
-- ✅ Accept a city name as a command-line argument 
+- ✅ Accept a city name as a command-line argument
 - ✅ Fetch current weather from a free API (like OpenWeatherMap or WeatherAPI)
 - ✅ Display results with ASCII art weather icons (sun, clouds, rain, etc.)
-- Show temperature, conditions, humidity, and wind speed
+- ✅ Show temperature, conditions, humidity, and wind speed
 - ✅Color-code output using chalk or similar library
 - Handle errors gracefully (invalid city, network issues)
 
@@ -21,15 +21,6 @@ Build a command-line weather app that fetches and displays weather data with a n
 **Tech stack:**
 
 - Node.js
-- `node-fetch` or `axios` for API calls
+- `node-fetch` for API calls
 - `chalk` for colors
-- `commander` or `yargs` for CLI parsing
 - `dotenv` for API key management
-
-This is project:
-
-- It's practical and demonstrates API integration
-- Shows you can build CLI tools
-- Small enough to finish in a few hours
-- Easy to extend with more features later
-- Makes a nice README with screenshots
