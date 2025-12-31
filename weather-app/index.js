@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+
 
 import dotenv from 'dotenv/config'
 import chalk from 'chalk'
@@ -52,16 +52,51 @@ async function getWeather(city) {
 
     log(`\n${chalk.bold.yellow(time)}`)
     log(chalk.bold.green(`Weather in ${city} »`))
+
     console.group();
-    log(`\n${chalk.bold.cyan(condition)}`)
+      switch (condition) {
+        case "Sunny":
+          log(`
+            ${chalk.bold.yellow(condition)} ☀️`)
+          break;
+        case "Cloudy":
+        case "Partly Cloudy":
+          log(`
+            ${chalk.bold.cyan(condition)} ⛅`)
+          break;
+        case "Light rain":
+        case "Moderate rain": 
+        case "Heavy rain":
+          log(`
+            ${chalk.bold.blue(condition)} 🌧️`)
+          break;
+        case "Light snow":
+        case "Patchy moderate snow":
+        case "Moderate snow": 
+        case "Heavy snow":
+          log(`
+            ${chalk.bold.cyan(condition)} ❄️`)
+        default:
+          console.log(`
+            ${chalk.bold.red('Weather condition not available...')}`);
+      }
+
+      console.groupEnd();
+
     if(tempC < 18 || tempF < 64.4){
-      log(`${chalk.bold.blue(tempC)}${chalk.bold.blue('°C')} | ${chalk.bold.blue(tempF)}${chalk.bold.blue('°F')}\n`)
+      log(`
+        ${chalk.bold.blue(tempC)}${chalk.bold.blue('°C')} | ${chalk.bold.blue(tempF)}${chalk.bold.blue('°F')}\n`)
     } else {
-      log(`${chalk.bold.red(tempC)}${chalk.bold.red('°C')} | ${chalk.bold.red(tempF)}${chalk.bold.red('°F')}\n`)
+      log(`
+        ${chalk.bold.red(tempC)}${chalk.bold.red('°C')} | ${chalk.bold.red(tempF)}${chalk.bold.red('°F')}\n`)
     }
     console.groupEnd();
   } catch (error){
-     log(error.message)
+    if(error.code = 400 ){
+      log(`${chalk.bold.red(`Invalid city: ${city}. Please enter a valid location.`)}`)
+    } else {
+      log(`Error: ${error.message}`)
+    }
    }
 
   }

@@ -2,7 +2,7 @@
   "name": "weather-app",
   "version": "1.0.0",
   "description": "Node weather app",
-  "main": "index.js",
+  "main": "./index.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,7 +10,7 @@
   "author": "Cristi Gtz Name",
   "license": "ISC",
   "bin": {
-    "hello": "./bin/index.js"
+    "weather-report": "./index.js"
   },
   "dependencies": {
     "chalk": "^5.6.2",
